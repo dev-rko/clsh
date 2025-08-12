@@ -1,0 +1,19 @@
+﻿@using Calc.Rest.Controllers
+<!doctype html>
+<html lang="en" class="html-root">
+<head>
+    <meta charset="utf-8" />
+    <title>Clean Shop</title>
+    <base href="/" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="@Url.Content("~/ang_app/cat.ico")" rel="icon" type="image/x-icon" />
+    <link href="@Url.Content("~/ang_app/styles.css")" rel="stylesheet">
+    @* <script src="@Url.Content("~/ang_app/config/environment.config.js")" type="module"></script> *@
+</head>
+<body class="body">
+    <app-root></app-root>
+    <script src="@Url.Content("~/ang_app/polyfills.js")" type="module"></script>
+    <script src="@Url.Content("~/ang_app/main.js")?v=#versionPlaceholder#" type="module"></script>
+</body>
+</html>

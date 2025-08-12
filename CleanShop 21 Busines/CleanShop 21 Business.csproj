@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>CleanShop.Business</AssemblyName>
+        <RootNamespace>CleanShop.Business</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation"  />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CleanShop 00 Entities\CleanShop 00 Entities.csproj" />
+        <ProjectReference Include="..\CleanShop 01 Common\CleanShop 01 Common.csproj" />
+    </ItemGroup>
+
+</Project>

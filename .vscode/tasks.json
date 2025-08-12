@@ -1,0 +1,109 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CleanShop.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/CleanShop.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/CleanShop.sln"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "docker-run: debug",
+            "type": "docker-run",
+            "dependsOn": [
+                "docker-build: debug"
+            ],
+            "dockerRun": {
+                "ports": [
+                    {
+                        "hostPort": 5000,
+                        "containerPort": 80
+                    },
+                    {
+                        "hostPort": 5002,
+                        "containerPort": 5002
+                    }
+                ],
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Development",
+                    "ASPNETCORE_URLS": "http://+:80"
+                }
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/CleanShop 71 RestApi/CleanShop 71 RestApi.csproj",
+                "enableDebugging": true
+            }
+        },
+        {
+            "label": "docker-build: debug",
+            "type": "docker-build",
+            "dockerBuild": {
+                "context": "${workspaceFolder}",
+                "dockerfile": "${workspaceFolder}/CleanShop 71 RestApi/Dockerfile",
+                "target": "build"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/CleanShop 71 RestApi/CleanShop 71 RestApi.csproj",
+                "enableDebugging": true
+            }
+        },
+        {
+            "label": "docker-compose-debug-hot-reload",
+            "type": "docker-compose",
+            "dockerCompose": {
+                "up": {
+                    "detached": true,
+                    "build": true,
+                    "files": [
+                        "${workspaceFolder}/docker-compose.debug.yml"
+                    ]
+                }
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/CleanShop 71 RestApi/CleanShop 71 RestApi.csproj",
+                "enableDebugging": true
+            }
+        },
+        {
+            "label": "docker-compose-down",
+            "type": "docker-compose",
+            "dockerCompose": {
+                "down": {
+                    "files": [
+                        "${workspaceFolder}/docker-compose.debug.yml"
+                    ]
+                }
+            }
+        }
+    ]
+}

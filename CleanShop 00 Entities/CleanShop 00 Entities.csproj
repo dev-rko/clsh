@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>CleanShop.Entities</AssemblyName>
+        <RootNamespace>CleanShop.Entities</RootNamespace>
+    </PropertyGroup>  
+
+</Project>

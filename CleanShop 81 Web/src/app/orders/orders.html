@@ -1,0 +1,10 @@
+
+<a [routerLink]="['/']"> home</a>
+<p>list of orders</p>
+
+<ul>
+    @for(item of Ctrl.Items; track item.Name)
+    {
+    <li>{{item.Name}}</li>
+    }
+</ul>

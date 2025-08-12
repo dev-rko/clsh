@@ -1,0 +1,138 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "CleanShop": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.less"
+            ]
+          },
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "500kB",
+                            "maximumError": "1MB"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "4kB",
+                            "maximumError": "8kB"
+                        }
+                    ],
+                    "outputHashing": "all"
+                },
+                "development": {
+                    "index": "src/index.html",
+                    "optimization": false,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "src/envs/environment.ts",
+                            "with": "src/envs/environment.development.ts"
+                        }
+                    ]
+                },
+                "app": {
+                    "index": "src/index.html",
+                    "baseHref": "/App/",
+                    "outputPath": {
+                        "base": "../CleanShop 71 RestApi/wwwroot/ang_app/",
+                        "browser": ""
+                    },
+                    "optimization": false,
+                    "extractLicenses": false,
+                    "sourceMap": false,
+                    "assets": [
+                        {
+                            // Copy contents in this folder
+                            "input": "./src/static",
+                            // That matches this wildcard
+                            "glob": "cat.ico",
+                            // And put them in this folder under `dist` ("." means put it in `dist` directly)
+                            "output": "."
+                        }
+                    ]
+                }
+            },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+            "builder": "@angular/build:dev-server",
+            "options": {
+                "proxyConfig": "src/proxy.conf.json"
+            },
+          "configurations": {
+            "production": {
+              "buildTarget": "CleanShop:build:production"
+            },
+            "development": {
+              "buildTarget": "CleanShop:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.less"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

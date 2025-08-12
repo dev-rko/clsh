@@ -1,0 +1,10 @@
+{
+    "docker.defaultExtensions": [
+        "ms-dotnettools.csharp"
+    ],
+    "docker.composeFile": "docker-compose.yml",
+    "docker.debugging": true,
+    "docker.attachShellCommand.linuxContainer": "/bin/bash",
+    "docker.attachShellCommand.windowsContainer": "powershell",
+    "dotnet.defaultSolution": "CleanShop.sln"
+}

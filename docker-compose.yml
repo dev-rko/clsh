@@ -1,0 +1,6 @@
+services:
+  cleanshop71restapi:
+    image: ${DOCKER_REGISTRY-}cleanshop71restapi
+    build:
+      context: .
+      dockerfile: CleanShop 71 RestApi/Dockerfile

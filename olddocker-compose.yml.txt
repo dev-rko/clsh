@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # SQL Server Database
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - cleanshop-network
+
+  # CleanShop RestApi
+  cleanshop-api:
+    build:
+      context: .
+      dockerfile: CleanShop 71 RestApi/Dockerfile
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CleanShopDb;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true
+    depends_on:
+      - sqlserver
+    networks:
+      - cleanshop-network
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:
+
+networks:
+  cleanshop-network:
+    driver: bridge

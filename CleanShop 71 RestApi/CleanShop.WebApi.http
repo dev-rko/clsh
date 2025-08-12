@@ -1,0 +1,6 @@
+@CleanShop.RestApi_HostAddress = http://localhost:5286
+
+GET {{CleanShop.RestApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

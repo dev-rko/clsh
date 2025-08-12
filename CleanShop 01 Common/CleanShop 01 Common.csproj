@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>CleanShop.Common</AssemblyName>
+        <RootNamespace>CleanShop.Common</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CleanShop 00 Entities\CleanShop 00 Entities.csproj" />
+    </ItemGroup>
+
+</Project>

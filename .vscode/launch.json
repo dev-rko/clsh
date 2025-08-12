@@ -1,0 +1,83 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CleanShop 71 RestApi/bin/Debug/net9.0/CleanShop.RestApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CleanShop 71 RestApi",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },
+        {
+            "name": "Docker: Launch .NET Core (HTTP Only)",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/CleanShop 71 RestApi/CleanShop 71 RestApi.csproj",
+                "enableDebugging": true
+            },
+            "containerName": "cleanshop-api",
+            "ports": [
+                {
+                    "hostPort": 5000,
+                    "containerPort": 80
+                },
+                {
+                    "hostPort": 5002,
+                    "containerPort": 5002
+                }
+            ],
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:80"
+            }
+        },
+        {
+            "name": "Docker Compose: Debug with Hot Reload (HTTP Only)",
+            "type": "docker-compose",
+            "request": "launch",
+            "preLaunchTask": "docker-compose-debug-hot-reload",
+            "netCore": {
+                "appProject": "${workspaceFolder}/CleanShop 71 RestApi/CleanShop 71 RestApi.csproj",
+                "enableDebugging": true
+            },
+            "dockerComposeFile": "${workspaceFolder}/docker-compose.debug.yml",
+            "service": "cleanshop-api",
+            "containerName": "cleanshop-api",
+            "ports": [
+                {
+                    "hostPort": 5000,
+                    "containerPort": 80
+                },
+                {
+                    "hostPort": 5002,
+                    "containerPort": 5002
+                }
+            ],
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:80",
+                "DOTNET_USE_POLLING_FILE_WATCHER": "1"
+            }
+        }
+    ]
+}
